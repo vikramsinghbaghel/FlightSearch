@@ -1,5 +1,9 @@
 package com.nagarro.validation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Validate {
 	public boolean departLoc(String deptLoc) {
 		if (deptLoc.length() != 3) {
@@ -26,13 +30,42 @@ public class Validate {
 	}
 
 	public boolean flightDate(String date) {
-		if (date.matches("^(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])-[0-9]{4}$")) {
-			return true;
-		} else {
-			System.out.println("DD-MM-YYYY should be the date format");
-			return false;
-		}
+//		if (date.matches("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$")) {
+//			return true;
+//		} 
+//		else if()
+//		
+//		{
+//			System.out.println("DD-MM-YYYY should be the date format");
+//			return false;
+//		}
+		
+		SimpleDateFormat sdfrmt = new SimpleDateFormat("dd-MM-yyyy");
+	    sdfrmt.setLenient(false);
+	    
+	    try
+	    {
+	        Date javaDate = sdfrmt.parse(date); 
+	      //  System.out.println(date+" is valid date format");
+	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
+	        Date currentdate = new Date();  
+	        formatter.format(currentdate);
+	     //   if(javaDate.before(currentdate)) {
+	        if(javaDate.compareTo(currentdate)<=0) {
+	        	System.out.println("please enter the upcomming date");
+	        	return false;
+	        }
+	    }
+	   
+	    catch (ParseException e)
+	    {
+	        System.out.println(date+" is Invalid Date format");
+	        return false;
+	    }
+	   
+	    return true;
 	}
+		
 
 	public boolean flightClass(String flightClass) {
 		if (flightClass.equals("E") || flightClass.equals("B") || flightClass.equals("EB")) {

@@ -14,7 +14,7 @@ public class FolderWatcherService implements Runnable {
 	public void run() {
 		try {
 			WatchService watchService = FileSystems.getDefault().newWatchService();
-			Path path = Paths.get("C:\\Users\\vikrambaghel\\eclipse-workspace\\FlightSearch\\Resources");
+			Path path = Paths.get("C:\\Users\\vikrambaghel\\git\\FlightSearch\\FlightSearch\\Resources");
 
 			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
 					StandardWatchEventKinds.ENTRY_MODIFY);
